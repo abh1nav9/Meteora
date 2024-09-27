@@ -1,14 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import search from '../server/weatherInfo';
 
-function SearchBar() {
+function SearchBar({ setWeatherData }) {
+  const [city, setCity] = useState('');
+
+  const handleSearch = async () => {
+    const data = await search(city);
+    if (data) {
+      setWeatherData(data); // Update parent component with fetched data
+      setCity(''); // Clear the input
+    }
+  };
+
+  // Handle key press events
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch(); // Call handleSearch when Enter key is pressed
+    }
+  };
+
   return (
     <div className="flex items-center justify-center w-full p-4 bg-transparent">
       <input
         type="text"
-        placeholder="Search..."
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        onKeyPress={handleKeyPress} // Attach the key press event handler
+        placeholder="Search for a city..."
         className="w-full max-w-md p-2 border border-gray-300 rounded-lg bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <button className="ml-2 p-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+      <button 
+        onClick={handleSearch}
+        className="ml-2 p-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+      >
         Search
       </button>
     </div>
