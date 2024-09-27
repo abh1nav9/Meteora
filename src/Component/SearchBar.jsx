@@ -7,15 +7,14 @@ function SearchBar({ setWeatherData }) {
   const handleSearch = async () => {
     const data = await search(city);
     if (data) {
-      setWeatherData(data); // Update parent component with fetched data
-      setCity(''); // Clear the input
+      setWeatherData(data);
+      setCity('');
     }
   };
 
-  // Handle key press events
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSearch(); // Call handleSearch when Enter key is pressed
+      handleSearch();
     }
   };
 
@@ -25,7 +24,7 @@ function SearchBar({ setWeatherData }) {
         type="text"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        onKeyPress={handleKeyPress} // Attach the key press event handler
+        onKeyPress={handleKeyPress}
         placeholder="Search for a city..."
         className="w-full max-w-md p-2 border border-gray-300 rounded-lg bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />

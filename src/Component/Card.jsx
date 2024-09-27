@@ -1,8 +1,6 @@
 import React from "react";
 
-// Function to return weather SVG icons based on the weather condition
 const getWeatherIcon = (description) => {
-  // Define your SVG icons here based on description
 };
 
 function Card({ weatherData }) {
